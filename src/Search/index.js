@@ -19,11 +19,13 @@ import countriesList from "./countries.json";
 
 class App extends Component {
   state = {
-    search: ""
+    search: "",
+    searchcolor: ""
   };
 
   renderCountry = country => {
     const search = this.state.search;
+    const searchcolor = this.state.searchcolor;
     var code = country.code.toLowerCase();
 
     /*if( search !== "" && country.name.toLowerCase().indexOf( search.toLowerCase() ) === -1 ){
@@ -41,6 +43,7 @@ class App extends Component {
                 alt={country.name}
               />
             </p>
+            <CardText>{country.color}</CardText>
             <CardTitle title={country.name}>
               {country.name.substring(0, 15)}
               {country.name.length > 15 && "..."}
@@ -55,11 +58,22 @@ class App extends Component {
     this.setState({ search: e.target.value });
   };
 
+  onchange2 = e => {
+    this.setState({ searchcolor: e.target.value });
+  };
+
   render() {
     const search = this.state.search;
+    const searchcolor = this.state.searchcolor;
     const filteredCountries = countriesList.filter(country => {
       return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
+
+  const filteredcolors = countriesList.filter
+  (color => {
+    return color.name.toLowerCase().indexOf(searchcolor.toLowerCase()) !== -1;
+  })
+
 
     return (
       <div className="flyout">
@@ -85,14 +99,29 @@ class App extends Component {
                   onChange={this.onchange}
                 />
               </div>
+              <div >
+                <Input
+                  label="Search Color"
+                  icon="search"
+                  onChange={this.onchange2}
+                />
+              </div>
+
               <div className="col" />
             </div>
 
             
             <div className="row">
-              {filteredCountries.map(country => {
+              {this.state.search ? filteredCountries.map(country => {
                 return this.renderCountry(country);
-              })}
+              }): this.state.searchcolor ? filteredcolors.map(country => {
+                return this.renderCountry(country);
+              }): filteredCountries.map(country => {
+                return this.renderCountry(country);
+              })
+            
+            
+            }
             </div>
           </div>
         </main>
