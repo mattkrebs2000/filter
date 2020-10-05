@@ -20,12 +20,14 @@ import countriesList from "./countries.json";
 class App extends Component {
   state = {
     search: "",
-    searchcolor: ""
+    searchcolor: "",
+    eitherone: "", 
   };
 
-  renderCountry = country => {
+  renderCountry = (country) => {
     const search = this.state.search;
     const searchcolor = this.state.searchcolor;
+    const eitherone = this.state.eitherone;
     var code = country.code.toLowerCase();
 
     /*if( search !== "" && country.name.toLowerCase().indexOf( search.toLowerCase() ) === -1 ){
@@ -54,27 +56,43 @@ class App extends Component {
     );
   };
 
-  onchange = e => {
+  onchange = (e) => {
     this.setState({ search: e.target.value });
   };
 
-  onchange2 = e => {
+  onchange2 = (e) => {
     this.setState({ searchcolor: e.target.value });
+  };
+
+  onchange3 = (e) => {
+    this.setState({ eitherone: e.target.value });
   };
 
   render() {
     const search = this.state.search;
     const searchcolor = this.state.searchcolor;
-    const filteredCountries = countriesList.filter(country => {
+    const eitherone = this.state.eitherone;
+
+    const filteredCountries = countriesList.filter((country) => {
       return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
 
-  const filteredcolors = countriesList.filter
-  (color => {
+    const filteredcolors = countriesList.filter((color) => {
+      return (
+        color.color.toLowerCase().indexOf(searchcolor.toLowerCase()) !== -1
+      );
+    });
 
+     const filteredEither = countriesList.filter((country) => {
 
-    return color.color.toLowerCase().indexOf(searchcolor.toLowerCase()) !== -1;
-  })
+ const both =
+ country.name.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1 ||
+ country.color.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1
+ ;
+
+ return both;
+
+     });
 
 
     return (
@@ -101,7 +119,7 @@ class App extends Component {
                   onChange={this.onchange}
                 />
               </div>
-              <div >
+              <div>
                 <Input
                   label="Search Color"
                   icon="search"
@@ -109,21 +127,33 @@ class App extends Component {
                 />
               </div>
 
+              <div>
+                <Input
+                  label="Search Either"
+                  icon="search"
+                  onChange={this.onchange3}
+                />
+              </div>
+
               <div className="col" />
             </div>
 
-            
             <div className="row">
-              {this.state.search ? filteredCountries.map(country => {
-                return this.renderCountry(country);
-              }): this.state.searchcolor ? filteredcolors.map(country => {
-                return this.renderCountry(country);
-              }): filteredCountries.map(country => {
-                return this.renderCountry(country);
-              })
-            
-            
-            }
+              {this.state.search
+                ? filteredCountries.map((country) => {
+                    return this.renderCountry(country);
+                  })
+                : this.state.searchcolor
+                ? filteredcolors.map((country) => {
+                    return this.renderCountry(country);
+                  })
+                : this.state.eitherone
+                ? filteredEither.map((country) => {
+                    return this.renderCountry(country);
+                  })
+                : filteredCountries.map((country) => {
+                    return this.renderCountry(country);
+                  })}
             </div>
           </div>
         </main>
