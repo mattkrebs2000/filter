@@ -71,7 +71,9 @@ class App extends Component {
 
   const filteredcolors = countriesList.filter
   (color => {
-    return color.name.toLowerCase().indexOf(searchcolor.toLowerCase()) !== -1;
+
+
+    return color.color.toLowerCase().indexOf(searchcolor.toLowerCase()) !== -1;
   })
 
 
