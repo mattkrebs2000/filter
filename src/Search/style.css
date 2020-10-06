@@ -2,3 +2,22 @@
     left: 0;
     top: 12px;
 }
+.autoContainer {
+  position: absolute;
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  border-color: goldenrod;
+  background-color: whitesmoke;
+  right: 10px;
+  top: 52px;
+  width: 520px;
+  border: 20px solid purple;
+}
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  padding: 5px;
+  background-color: green;
+}

@@ -140,6 +140,24 @@ console.log("Hello", e.target.title)
                   icon="search"
                   onChange={this.onchange3}
                 />
+                {this.state.eitherone && (
+                  <div className="autoContainer">
+                    {filteredEither
+                      .map((value, i) => {
+                        return (
+                          <div
+                            // onClick={() => updatePokeDex(value.name)}
+                            className="option"
+                            key={i}
+                            tabIndex="0"
+                          >
+                            <span>{value.name}</span>
+                            <img src={value.color} alt="pokemon" />
+                          </div>
+                        );
+                      })}
+                  </div>
+                )}
               </div>
 
               <div className="col" />
