@@ -7,7 +7,7 @@ import {
   CardBody,
   CardImage,
   CardTitle,
-  CardText
+  CardText,
 } from "mdbreact";
 
 import blankImg from "./blank.gif";
@@ -21,7 +21,8 @@ class App extends Component {
   state = {
     search: "",
     searchcolor: "",
-    eitherone: "", 
+    eitherone: "",
+    display: false,
   };
 
   renderCountry = (country) => {
@@ -35,7 +36,11 @@ class App extends Component {
     }*/
 
     return (
-      <div className="col-md-3" style={{ marginTop: "20px" }}>
+      <div
+        className="col-md-3"
+        name={country.name}
+        style={{ marginTop: "20px" }}
+      >
         <Card>
           <CardBody>
             <p className="">
@@ -46,7 +51,7 @@ class App extends Component {
               />
             </p>
             <CardText>{country.color}</CardText>
-            <CardTitle title={country.name}>
+            <CardTitle title={country.name} onClick={this.onclick}>
               {country.name.substring(0, 15)}
               {country.name.length > 15 && "..."}
             </CardTitle>
@@ -55,6 +60,12 @@ class App extends Component {
       </div>
     );
   };
+
+onclick = (e) => {
+this.setState({search: e.target.title})
+console.log("Hello", e.target.title)
+}
+
 
   onchange = (e) => {
     this.setState({ search: e.target.value });
@@ -83,17 +94,13 @@ class App extends Component {
       );
     });
 
-     const filteredEither = countriesList.filter((country) => {
-
- const both =
- country.name.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1 ||
- country.color.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1
- ;
-
- return both;
-
-     });
-
+    const filteredEither = countriesList.filter((country) => {
+      const both =
+        country.name.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1 ||
+        country.color.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1;
+      console.log(both);
+      return both;
+    });
 
     return (
       <div className="flyout">
