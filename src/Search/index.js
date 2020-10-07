@@ -79,6 +79,10 @@ console.log("Hello", e.target.title)
     this.setState({ eitherone: e.target.value });
   };
 
+  makeChoice = () => {
+   console.log("hereissomething", this.state.display)
+  }
+
   render() {
     const search = this.state.search;
     const searchcolor = this.state.searchcolor;
@@ -137,25 +141,26 @@ console.log("Hello", e.target.title)
               <div>
                 <Input
                   label="Search Either"
+                  onClick={() => this.setState({display:!this.state.display})}
                   icon="search"
                   onChange={this.onchange3}
+                 
                 />
-                {this.state.eitherone && (
+             
+                {this.state.display && (
                   <div className="autoContainer">
-                    {filteredEither
-                      .map((value, i) => {
-                        return (
-                          <div
-                            // onClick={() => updatePokeDex(value.name)}
-                            className="option"
-                            key={i}
-                            tabIndex="0"
-                          >
-                            <span>{value.name}</span>
-                           
-                          </div>
-                        );
-                      })}
+                    {filteredEither.map((value, i) => {
+                      return (
+                        <div
+                          // onClick={() => updatePokeDex(value.name)}
+                          className="option"
+                          key={i}
+                          tabIndex="0"
+                        >
+                          <span>{value.name}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
