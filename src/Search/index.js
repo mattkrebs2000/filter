@@ -152,7 +152,7 @@ console.log("Hello", e.target.title)
                             tabIndex="0"
                           >
                             <span>{value.name}</span>
-                            <img src={value.color} alt="pokemon" />
+                           
                           </div>
                         );
                       })}
@@ -163,7 +163,7 @@ console.log("Hello", e.target.title)
               <div className="col" />
             </div>
 
-            <div className="row">
+            <div className="flags row">
               {this.state.search
                 ? filteredCountries.map((country) => {
                     return this.renderCountry(country);

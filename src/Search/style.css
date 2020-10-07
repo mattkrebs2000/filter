@@ -8,16 +8,21 @@
   border-style: solid;
   border-color: goldenrod;
   background-color: whitesmoke;
-  right: 10px;
-  top: 52px;
-  width: 520px;
+  width: 120px;
   border: 20px solid purple;
+  z-index: 1;
 }
+
+
 .option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 500px;
+  width: 120px;
   padding: 5px;
   background-color: green;
+}
+
+.flags {
+z-index: .9;
 }
