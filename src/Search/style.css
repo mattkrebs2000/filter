@@ -4,13 +4,18 @@
 }
 .autoContainer {
   position: absolute;
-  border-width: 0px 1px 1px 1px;
+  border-width: 0px 1px 0px 1px;
   border-style: solid;
-  border-color: goldenrod;
+ 
   background-color: whitesmoke;
-  width: 120px;
-  border: 20px solid purple;
+  width: 220px;
+ margin-top: -20px;
   z-index: 1;
+  overflow-y:scroll;
+  overflow-x: hidden;
+  margin-left: 40px;
+  height: inherit;
+   max-height: 200px;
 }
 
 
@@ -18,11 +23,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 120px;
+  width: 220px;
   padding: 5px;
-  background-color: green;
+  background-color:lightgray;
+
 }
 
 .flags {
 z-index: .9;
+}
+
+input label {
+color:red;
+
 }

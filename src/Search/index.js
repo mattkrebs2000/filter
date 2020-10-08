@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import {
-  Button,
   Input,
   Footer,
   Card,
   CardBody,
-  CardImage,
   CardTitle,
   CardText,
 } from "mdbreact";
@@ -26,15 +24,8 @@ class App extends Component {
   };
 
   renderCountry = (country) => {
-    const search = this.state.search;
-    const searchcolor = this.state.searchcolor;
-    const eitherone = this.state.eitherone;
+  
     var code = country.code.toLowerCase();
-
-    /*if( search !== "" && country.name.toLowerCase().indexOf( search.toLowerCase() ) === -1 ){
-        return null
-    }*/
-
     return (
       <div
         className="col-md-3"
@@ -61,12 +52,6 @@ class App extends Component {
     );
   };
 
-onclick = (e) => {
-this.setState({search: e.target.title})
-console.log("Hello", e.target.title)
-}
-
-
   onchange = (e) => {
     this.setState({ search: e.target.value });
   };
@@ -79,15 +64,10 @@ console.log("Hello", e.target.title)
     this.setState({ eitherone: e.target.value });
   };
 
-  makeChoice = () => {
-   console.log("hereissomething", this.state.display)
-  }
-
   render() {
     const search = this.state.search;
     const searchcolor = this.state.searchcolor;
     const eitherone = this.state.eitherone;
-
     const filteredCountries = countriesList.filter((country) => {
       return country.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
@@ -102,27 +82,26 @@ console.log("Hello", e.target.title)
       const both =
         country.name.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1 ||
         country.color.toLowerCase().indexOf(eitherone.toLowerCase()) !== -1;
-      console.log(both);
+    
       return both;
     });
+
+const selectItem = item => {
+
+  this.setState({eitherone: item});
+  this.setState({display: false });
+  document.getElementById("inputt").value = item; 
+  document.getElementsByTagName("label")[2].classList.add("active");
+  console.log(item)
+}
+
 
     return (
       <div className="flyout">
         <main style={{ marginTop: "4rem" }}>
           <div className="container">
             <div className="row">
-              <div className="col-12">
-                <center>
-                  <h3>
-                    <a
-                      href="https://www.youtube.com/watch?v=RM_nXOyHwN0"
-                      target="_blank"
-                    >
-                      Watch youtube demo here
-                    </a>
-                  </h3>
-                </center>
-              </div>
+              <div className="col-12"></div>
               <div className="col">
                 <Input
                   label="Search Country"
@@ -140,22 +119,25 @@ console.log("Hello", e.target.title)
 
               <div>
                 <Input
-                  label="Search Either"
-                  onClick={() => this.setState({display:!this.state.display})}
+                  id="inputt"
+                  onClick={() =>
+                    this.setState({ display: !this.state.display })
+                  }
                   icon="search"
                   onChange={this.onchange3}
-                 
+                  type="text"
+                 label="Search Either" class="active"
                 />
-             
+
                 {this.state.display && (
                   <div className="autoContainer">
                     {filteredEither.map((value, i) => {
                       return (
                         <div
-                          // onClick={() => updatePokeDex(value.name)}
                           className="option"
                           key={i}
                           tabIndex="0"
+                          onClick={() => selectItem(value.name)}
                         >
                           <span>{value.name}</span>
                         </div>
